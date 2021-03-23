@@ -1,15 +1,11 @@
 import React, { useState } from "react";
+import Subsription from "./Subscription";
 
 function Hotel({ hotel }) {
   const [isShown, setIsShown] = useState(false);
   const [isEmaiInputShown, setIsEmaiInputShown] = useState(false);
 
-  const [isValidEmail, setIsValidEmail] = useState(false);
   const [email, setEmail] = useState("");
-
-  function validation(str) {
-    if (str.includes("@") && str.includes(".")) return setIsValidEmail(true);
-  }
 
   return (
     <div className="hotel">
@@ -23,22 +19,7 @@ function Hotel({ hotel }) {
           <button onClick={() => setIsEmaiInputShown(!isEmaiInputShown)}>Request more info about {hotel.name}</button>
         </div>
       )}
-      {isEmaiInputShown && (
-        <div>
-          <input
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              console.log(email);
-              validation(email);
-            }}
-            type="email"
-          />
-          <button disabled={isValidEmail ? false : true} required>
-            Submit
-          </button>
-        </div>
-      )}
+      {isEmaiInputShown && <Subsription email={email} setEmail={setEmail} hotel={hotel.name} />}
     </div>
   );
 }
